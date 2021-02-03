@@ -21,19 +21,22 @@ public class Steps {
 	}
 	
 	@When("Enter valid credentials")
-	public void enter_valid_credentials() throws InterruptedException {
+	public void enter_valid_credentials() throws InterruptedException  {
 		driver.findElement(By.xpath("//input[@id='txtUsername']")).sendKeys("Admin");
 		driver.findElement(By.xpath("//input[@id='txtPassword']")).sendKeys("admin123");
-	    	driver.findElement(By.xpath("//input[@id='btnLogin']")).click();
-	    	Thread.sleep(3000);
+	    driver.findElement(By.xpath("//input[@id='btnLogin']")).click();
+	    Thread.sleep(3000);
 	}
 
 	@Then("Login successful")
-	public void login_successful() {
+	public void login_successful() throws InterruptedException {
+		Thread.sleep(3000);
 		String expected=driver.findElement(By.id("welcome")).getText();
-		String Actual="Welcome Paul";
+		String Actual="Welcome Paul";		
 		Assert.assertEquals(expected,Actual);
+		Thread.sleep(3000);
 		driver.findElement(By.id("welcome")).click();
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id='welcome-menu']/ul/li[2]/a")).click();
 	}
 	
@@ -41,15 +44,16 @@ public class Steps {
 	public void enter_invalid_credentials() throws InterruptedException {
 		driver.findElement(By.xpath("//input[@id='txtUsername']")).sendKeys("Admin123");
 		driver.findElement(By.xpath("//input[@id='txtPassword']")).sendKeys("admin123");
-	    	driver.findElement(By.xpath("//input[@id='btnLogin']")).click();
+	    driver.findElement(By.xpath("//input[@id='btnLogin']")).click();
 		Thread.sleep(3000);
 	}
 	
 	@Then("Login unsuccessfull")
-	public void login_unsuccessfull() {
+	public void login_unsuccessfull() throws InterruptedException {
+		Thread.sleep(3000);
 		String error=driver.findElement(By.xpath("//*[@id='spanMessage']")).getText();
-	    	String Actualerror="Invalid credentials"; 
-	    	Assert.assertEquals(error, Actualerror);
+	    String Actualerror="Invalid credentials";	    
+	    Assert.assertEquals(error, Actualerror);
 	}
 	
 }
