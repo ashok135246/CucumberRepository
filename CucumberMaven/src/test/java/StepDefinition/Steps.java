@@ -1,6 +1,9 @@
 package StepDefinition;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.sql.Driver;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,14 +33,15 @@ public class Steps {
 
 	@Then("Login successful")
 	public void login_successful() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		String expected=driver.findElement(By.id("welcome")).getText();
-		String Actual="Welcome Paul";		
+		String Actual="Welcome Nauman";		
 		Assert.assertEquals(expected,Actual);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		driver.findElement(By.id("welcome")).click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id='welcome-menu']/ul/li[2]/a")).click();
+		driver.quit();
 	}
 	
 	@When("Enter invalid credentials")
@@ -50,10 +54,12 @@ public class Steps {
 	
 	@Then("Login unsuccessfull")
 	public void login_unsuccessfull() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		String error=driver.findElement(By.xpath("//*[@id='spanMessage']")).getText();
 	    String Actualerror="Invalid credentials";	    
 	    Assert.assertEquals(error, Actualerror);
+	    driver.quit();
 	}
+	
 	
 }
